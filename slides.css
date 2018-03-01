@@ -1,0 +1,51 @@
+@import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+@import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+@import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+body { font-family: 'Droid Serif'; }
+h1, h2, h3 {
+  font-family: 'Yanone Kaffeesatz';
+  font-weight: normal;
+}
+
+pre {
+    font-family: 'Ubuntu Mono';
+    font-size: 18px;
+    background-color: #000;
+    border: 1px solid #000;
+    color: #fff;
+    padding: 0 1em;
+}
+
+.remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+
+.remark-slide-content h1 {
+    font-size: 56px;
+    color: #00989e;
+}
+
+.remark-slide-content > :first-child {
+    margin-top: 0;
+}
+
+
+.remark-code-line {
+    white-space: normal;
+    background-color: #000;
+    border: 1px solid #000;
+    color: #fff;
+    padding: 0 1em;
+    text-align: left;
+}
+
+.remark-slide-content:after {  
+    content: "";
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    height: 40x;
+    width: 116px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url("/Users/sebgoa/Desktop/training/bitnami/kubernetes/logo.png");
+}

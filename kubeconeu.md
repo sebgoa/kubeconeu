@@ -69,3 +69,37 @@ Today in Serverless 1.20 we now have kubeless support:
 and thanks, 
 
 - @sebgoa
+
+---
+
+## Istio
+
+An open platform to connect, manage, and secure microservices
+
+---
+
+## Demo Architecture
+
+- Comment Get Function
+- Raking App v1
+- Ranking App v2
+
+---
+
+## Demo
+
+1. Expose Comments
+2. Secure Comment Get with JWT
+3. Block traffic to Ranking App
+4. A/B testing
+
+---
+
+## Summary
+
+- Integration is working good
+- Limitations
+
+    - Mutual TLS
+    - Health Checks
+    - CLI

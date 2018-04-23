@@ -1,0 +1,8 @@
+{
+  "name": "Scotch-Ale",
+  "subtitle": "Eine torfig-malzige Brauspezialität.",
+  "description": "Torf wurde in Schottland traditionell zum Darren von Malz verwendet. Der Rauch des Torffeuers gibt dem Malz das unverwechselbare Aroma und somit auch dem Störtebeker Scotch-Ale die besonderen Torf- und Rauchnoten. Die belebende Kraft und lange Haltbarkeit schottischer Whiskys geht auf den hohen Alkoholgehalt zurück. 9% Alkohol wärmen, beleben und bilden die kräftige Basis des Störtebeker Scotch-Ales, ein naturbelassenes Strong-Ale aus britischem Whiskymalz mit Stammwürze 20,5 %. Genusstemperatur 16°C.",
+  "price": 0.98,
+  "image_url": "/img/scotch-ale.png",
+  "sku": "ale"
+}

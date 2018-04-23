@@ -1,0 +1,14 @@
+{
+  "name": "shop",
+  "version": "1.0.0",
+  "description": "[Business Casual](http://startbootstrap.com/template-overviews/business-casual/) is a multipurpose website theme for [Bootstrap](http://getbootstrap.com/) created by [Start Bootstrap](http://startbootstrap.com/). This theme features a landing page, about page, blog page, and a contact page along with various custom styles and components.",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}

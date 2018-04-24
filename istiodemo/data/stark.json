@@ -1,0 +1,8 @@
+{
+  "name": "Stark Bier",
+  "subtitle": "Stark wie ein Seebär",
+  "description": "Naturbelassenes, untergäriges dunkles Starkbier mit Stammwürze 18% und Alk. 7,5% vol. Die 20x0,5l und 24x0,33l Artikel werden in neutralen Mehrweg-Pfandkisten versendet.",
+  "price": 1.20,
+  "image_url": "/img/stark-bier.png",
+  "sku": "stark"
+}

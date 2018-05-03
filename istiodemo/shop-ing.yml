@@ -1,0 +1,27 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: beershop
+  annotations:
+    kubernetes.io/ingress.class: istio
+spec:
+  rules:
+  - host: beershop.local
+    http:
+      paths:
+      - path: /products/.*
+        backend:
+          serviceName: product-service
+          servicePort: 8080
+      - path: /comments/.*
+        backend:
+          serviceName: comments
+          servicePort: 8080
+      - path: /rating/.*
+        backend:
+          serviceName: rating
+          servicePort: 8080
+      - path: /.*
+        backend:
+          serviceName: beershop-service
+          servicePort: 80

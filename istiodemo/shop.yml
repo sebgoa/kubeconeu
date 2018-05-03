@@ -1,0 +1,63 @@
+apiVersion: apps/v1beta2 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: beershop-deployment
+  labels:
+    app: beershop
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: beershop
+  template:
+    metadata:
+      labels:
+        app: beershop
+    spec:
+      containers:
+      - name: beershop
+        image: joekhybris/beershop:kubecon
+        ports:
+        - containerPort: 80
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: beershop-service
+  labels:
+    app: beershop
+spec:
+  selector:
+    app: beershop
+  ports:
+  - name: http
+    protocol: TCP
+    port: 80
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: beershop
+  annotations:
+    kubernetes.io/ingress.class: istio
+spec:
+  rules:
+  - host: beershop.local
+    http:
+      paths:
+      - path: /products/.*
+        backend:
+          serviceName: product-service
+          servicePort: 8080
+      - path: /comments/.*
+        backend:
+          serviceName: comments
+          servicePort: 8080
+      - path: /rating/.*
+        backend:
+          serviceName: rating
+          servicePort: 8080
+      - path: /.*
+        backend:
+          serviceName: beershop-service
+          servicePort: 80

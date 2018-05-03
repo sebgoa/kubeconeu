@@ -1,0 +1,12 @@
+apiVersion: "authentication.istio.io/v1alpha1"
+kind: "Policy"
+metadata:
+  name: "comments"
+spec:
+  targets:
+  - name: comments
+  origins:
+  - jwt:
+      issuer: "beershop@istio-test-202708.iam.gserviceaccount.com"
+      jwksUri: "https://www.googleapis.com/service_accounts/v1/jwk/beershop@istio-test-202708.iam.gserviceaccount.com"
+  principalBinding: USE_ORIGIN

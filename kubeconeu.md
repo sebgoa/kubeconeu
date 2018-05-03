@@ -69,3 +69,45 @@ Today in Serverless 1.20 we now have kubeless support:
 and thanks, 
 
 - @sebgoa
+
+---
+
+## Istio
+
+An open platform to connect, manage, and secure microservices
+
+<p align="center">
+    <img src="./img/istio-logo.svg" width="40%">
+</p>
+---
+
+## Demo Architecture
+
+- etcd
+- Product-Service and Comments Function
+- Web UI
+
+---
+
+## MutualTLS
+
+<p align="center">
+    <img src="./img/auth.svg" width="100%">
+</p>
+
+---
+
+## JWT & RBAC
+
+- Secure comments using JWT
+- Use RBAC for authorisation
+
+---
+
+## Summary
+
+- Limitations
+
+    - Mutual TLS
+    - Health Checks
+    - CLI

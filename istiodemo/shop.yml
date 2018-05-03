@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: beershop
-        image: joekhybris/beershop:latest
+        image: joekhybris/beershop:kubecon
         ports:
         - containerPort: 80
 ---
@@ -33,7 +33,6 @@ spec:
   - name: http
     protocol: TCP
     port: 80
-
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
@@ -50,9 +49,13 @@ spec:
         backend:
           serviceName: product-service
           servicePort: 8080
-      - path: /users/create
+      - path: /comments/.*
         backend:
-          serviceName: user-create
+          serviceName: comments
+          servicePort: 8080
+      - path: /rating/.*
+        backend:
+          serviceName: rating
           servicePort: 8080
       - path: /.*
         backend:

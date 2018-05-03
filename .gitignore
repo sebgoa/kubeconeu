@@ -1,3 +1,4 @@
 istiodemo/istio-0.7.1
 node_modules
 istiodemo/shop/public/vendor
+gce-key.json

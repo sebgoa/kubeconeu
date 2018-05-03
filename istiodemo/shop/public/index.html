@@ -40,13 +40,13 @@
 
           </div>
         </div>
-
       </div>
     </section>
 
+
     <!-- Modal -->
 <div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="productModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="productModalLabel">Loading...</h5>
@@ -60,63 +60,55 @@
             <div class="col-8 col-sm-6 product-image"></div>
             <div class="col-4 col-sm-6 product-description"></div>
           </div>
+          <div class="row">
+            <div class="col-8 product-comments"></div>
+            <div class="col-4 product-rating"></div>
+          </div>
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button id="orderProductBtn" type="submit" class="btn btn-primary">Order</button>
       </div>
     </div>
   </div>
 </div>
 
-<div class="modal fade" id="orderModal" tabindex="-1" role="dialog" aria-labelledby="orderModalLabel" aria-hidden="true">
+<div class="modal fade" id="tokenModal" tabindex="-1" role="dialog" aria-labelledby="tokenModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="orderModalLabel">Create Order</h5>
+          <h5 class="modal-title" >Insert Token</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-            <div id="userForm" class="container-fluid"  style="display: none">
-              <div class="form-group">
-                  <label for="nameInput">Name</label>
-                  <input type="text" class="form-control" id="nameInput" placeholder="Max Mustermann">
-              </div>
-              <div class="form-group">
-                  <label for="emailInput">Email address</label>
-                  <input type="email" class="form-control" id="emailInput" placeholder="name@example.com">
-              </div>
-            </div>
-            <div id="webcam" class="container-fluid">
-              <video id='facePreview' autoplay></video>
-              <p id="training" style="display: none">Please wait, till faceID is trained...</p>
-              <button id="createUserBtn" type="submit" class="btn btn-primary btn-lg btn-block">Create User</button>    
-              <small>
-                Artificial Intelligence powered by <a href='https://machinebox.io/' target='_blank'>Machine Box</a>
-              </small>
-            </div>
+          <div class="container-fluid">
+            <textarea id="token" name="Token" id="token" cols="50" rows="10"></textarea>
           </div>
-        <div id="createUserButtons" class="modal-footer" style="display: none">
-          <button id="cancleOrderBtn" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button id="submitOrderBtn" type="submit" class="btn btn-primary">Submit</button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
         </div>
       </div>
     </div>
-</div>
+  </div>
+
 
     <footer class="footer text-faded text-center py-5">
       <div class="container">
         <p class="m-0 small">Copyright &copy; Your Website 2017</p>
+      </div>
+      <div class="container">
+          <button  type="button" class="btn btn-primary" data-toggle="modal" data-target="#tokenModal">
+            Login
+          </button>
       </div>
     </footer>
 
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="js/face.js"></script>
     <script src="js/product.js"></script>
   </body>
 

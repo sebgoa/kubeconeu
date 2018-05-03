@@ -1,0 +1,22 @@
+apiVersion: "config.istio.io/v1alpha2"
+kind: ServiceRole
+metadata:
+  name: developer
+  namespace: default
+spec:
+  rules:
+  - services: ['comments.default.svc.cluster.local']
+    methods: ['GET']
+---
+apiVersion: "config.istio.io/v1alpha2"
+kind: ServiceRoleBinding
+metadata:
+  name: developers
+  namespace: default
+spec:
+  subjects:
+  - properties:
+      principal: "beershop@istio-test-202708.iam.gserviceaccount.com/joek"
+  roleRef:
+    kind: ServiceRole
+    name: "developer"

@@ -76,28 +76,36 @@ and thanks,
 
 An open platform to connect, manage, and secure microservices
 
+<p align="center">
+    <img src="./img/istio-logo.svg" width="40%">
+</p>
 ---
 
 ## Demo Architecture
 
-- Comment Get Function
-- Raking App v1
-- Ranking App v2
+- etcd
+- Product-Service and Comments Function
+- Web UI
 
 ---
 
-## Demo
+## MutualTLS
 
-1. Expose Comments
-2. Secure Comment Get with JWT
-3. Block traffic to Ranking App
-4. A/B testing
+<p align="center">
+    <img src="./img/auth.svg" width="100%">
+</p>
+
+---
+
+## JWT & RBAC
+
+- Secure comments using JWT
+- Use RBAC for authorisation
 
 ---
 
 ## Summary
 
-- Integration is working good
 - Limitations
 
     - Mutual TLS

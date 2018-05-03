@@ -1,10 +1,9 @@
 
-var PRODUCT_URL  = 'https://beershop.local/products/';
-var ORDER_URL  = 'https://beershop.local/';
-var USER_URL  = 'https://beershop.local/';
-var FACEBOX_URL  = 'https://beershop.local/facebox';
+var PRODUCT_URL  = 'http://beershop.local/products/';
+var COMMENTS_URL = 'http://beershop.local/comments/';
+var RATING_URL = 'http://beershop.local/rating/';
 
-var stopFind = false
+var accessToken = "";
 
 $.getJSON(PRODUCT_URL, function( data ) {
   $.each(data, function( key, val ) {
@@ -15,6 +14,8 @@ $.getJSON(PRODUCT_URL, function( data ) {
       </div>`);
   });
 });
+
+
 
 var productID = ""
 
@@ -30,32 +31,32 @@ $('#productModal').on('show.bs.modal', function (event) {
       <img src="${data.image_url}" alt="Card image cap" class="rounded img-fluid">
       `)
   });
+
+  $.ajax({
+    url: COMMENTS_URL + productID, 
+    type: 'GET',
+    dataType: 'json',
+    success: function(data){
+      console.log(data)
+      data.forEach(function( entry ) {
+        modal.find('.modal-body .product-comments').append(`
+        <hr>
+        <h4>${entry.user}</h4>
+        <p>${entry.comment}</p>
+        `)
+      });
+    },
+    beforeSend: function(xhr){
+      console.log(accessToken)
+        xhr.setRequestHeader('Authorization', `Bearer ${accessToken}`)
+    }
+  }) 
+
+  $.get(RATING_URL + productID, function( data ) {
+    console.log(data)
+    modal.find('.modal-body .product-rating').html(data)
+  });
 })
-
-var fv = new machinebox.Face({
-  videoSelector: '#facePreview',
-  onStart: function(){
-    setTimeout(function(){findUser()}, 1000)
-  }
-})
-
-$('#orderProductBtn').click(function() {
-  $('#productModal').modal('hide')
-  $('#orderModal').modal('show')
-  $('#userForm').show()
-  $('#createUserButtons').show()
-  $('#webcam').hide()
-  event.preventDefault()
-});
-
-$('#submitOrderBtn').click(function( event ) {
-  $('#userForm').hide()
-  $('#cancleOrderBtn').hide()
-  $('#submitOrderBtn').hide()
-  createUserAndPlaceOrder()
-  event.preventDefault()
-});
-
 
 
 $('#productModal').on('hidden.bs.modal', function (event) {
@@ -66,26 +67,9 @@ $('#productModal').on('hidden.bs.modal', function (event) {
   modal.removeData('product')
 })
 
-function createUserAndPlaceOrder(){
-  var user = {
-    email: $('#emailInput').val(),
-    name: $('#nameInput').val()
-  }  
-  $.post(USER_URL + 'userCreate', user, function(response) {
-    placeOrder(response.id, 3)
-  }, 'json');
-}
 
-function placeOrder(userID, images){
-  $.getJSON(PRODUCT_URL + productID, function( data ) {
-    order = {
-      userID: userID,
-      items: [data],
-    }
-    $.post(ORDER_URL + 'orderCreate', order, function(orderResponse) {
-      $('#createUserBtn').hide()
-      window.location.href = "/order.html#" + orderResponse.id
-    }, 'json');
-  });
-}
+$('#tokenModal').on('hidden.bs.modal', function (event) {
+  var modal = $(this)
+  accessToken = $('textarea#token').val();
+})
 

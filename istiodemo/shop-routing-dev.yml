@@ -1,0 +1,17 @@
+apiVersion: config.istio.io/v1alpha2
+kind: RouteRule
+metadata:
+  name: rating-dev
+  namespace: default
+spec:
+  destination:
+    name: rating
+  precedence: 2
+  http:
+  - match:
+    - headers:
+      cookie:
+        regex: "^(.*?;)?(dev=true)(;.*)?"
+  route:
+  - labels:
+      version: v2

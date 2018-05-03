@@ -1,0 +1,29 @@
+---
+apiVersion: "config.istio.io/v1alpha2"
+kind: ServiceRole
+metadata:
+  name: default
+  namespace: default
+spec:
+  rules:
+  - services: 
+    - "etcd-client.default.svc.cluster.local"
+    - "etcd.default.svc.cluster.local"
+    - "product-service.default.svc.cluster.local"
+    - "beershop-service.default.svc.cluster.local"
+    methods: ["*"]
+---
+apiVersion: "config.istio.io/v1alpha2"
+kind: ServiceRoleBinding
+metadata:
+  name: default-binding
+  namespace: default
+spec:
+  subjects:
+  - properties:
+      namespace: "default"
+  - properties:
+      namespace: "istio-system"
+  roleRef:
+    kind: ServiceRole
+    name: "default"

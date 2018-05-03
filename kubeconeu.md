@@ -1,20 +1,23 @@
 #  Securing Serverless Functions via Kubernetes Objects
 
-JUST BOILERPLATE RIGHT NOW
 
-* Sebastien Goasguen @sebgoa
+* Sebastien Goasguen, Bitnami, @sebgoa
 * kompose, Cabin, kmachine, LF certification course ...
-* Now at Bitnami (Charts, monocular, kubeapps, kubecfg, sealed-secrets)
+* Now at Bitnami (Charts, kubeapps, kubecfg, sealed-secrets)
 * Apps, Apps, Apps...on any platform
+
+
+
+* Johannes Engelke, SAP Hybris, @quablab
 
 ---
 
-## kubeless
+## Kubeless
 
 * [kubeless.io](http://kubeless.io)
 * [https://github.com/kubeless/kubeless](https://github.com/kubeless/kubeless)
 
-Open Source , non-affiliated
+Open Source
 
 * [https://github.com/kubeless](https://github.com/kubeless)
 
@@ -22,29 +25,13 @@ Open Source , non-affiliated
 
 ---
 
-## kubeless
-
-* Kubernetes extension
-* CRD for `functions`
-* A controller (acutally several)
-* Creates deployments, services
-* Creates Ingress if needed
-* Uses Configmap, Init container for now
-* Instrumented runtimes with `prometheus-client`
-* A cute UI
-* A `serverless` Plugin
-* Custom metrics HPA
-
----
-
 ## What type of Apps
 
-* Event based distributed apps
+* Cloud Events based distributed apps
 * Composed of many different services triggered by events
-
-* AWS Lambda Clone
+* _AWS Lambda Clone_
 * Google Cloud functions like CLI
-* Same realm as OpenWhisk, Fission ...
+* Same realm as Apache OpenWhisk, Fission, Nuclio, OpenFaaS, Fn ...
 
 ---
 
@@ -52,9 +39,7 @@ Open Source , non-affiliated
 
 ![sls](sls.png)
 
-Today in Serverless 1.20 we now have kubeless support:
-
-20k stars, the _go to_ framework to deploy/managed serverless functions on lambda, Azure, GCF, OpenWhisk.
+Serverless support for kubeless
 
 `sls create --template kubeless-python --path mypythonfunction`
 
@@ -64,11 +49,88 @@ Today in Serverless 1.20 we now have kubeless support:
 
 ---
 
+## kubeless
+
+* Kubernetes extension
+* CRD for `functions`
+* A controller (actually several)
+* Creates deployments, services
+* Creates Ingress if needed
+* Uses Configmap and build system
+* Instrumented runtimes with `prometheus-client`
+* A `serverless` Plugin
+* Custom metrics HPA
+* Support for CloudEvents (see Austen's talk)
+
+---
+
+## Original Architecture
+
+![](./img/kubeless.png)
+
+---
+
+## Current Architecture in v1.0.0-alpha.1
+
+![](./img/kubeless-trigger.png)
+
+---
+
+## Security of Functions
+
+* Internal security
+* External security
+
+Internal Security:
+
+* Authentication / Authorization for who can CRUD functions where
+* Audit function creation
+* Log function
+* Limit what a compromised function could do
+
+External Security:
+
+* Mostly authentication issue for now
+* Who can call functions (e.g Ingress auth)
+* Who can a function call (e.g Function auth to an external service)
+
+---
+
+## Authn/Authz
+
+
+---
+
+## Security Context
+
+---
+
+## Security Account for functions
+
+---
+
+## Quota ?
+
+---
+
+## Network Policies
+
+---
+## External Security:
+
+* Mostly authentication issue for now
+* Who can call functions (e.g Ingress auth)
+* Who can a function call (e.g Function auth to an external service)
+
+---
+
 ## Demo
 
-and thanks, 
+Thank you,
 
 - @sebgoa
+
+Please Welcome Johannes Engelke,
 
 ---
 
@@ -79,6 +141,7 @@ An open platform to connect, manage, and secure microservices
 <p align="center">
     <img src="./img/istio-logo.svg" width="40%">
 </p>
+
 ---
 
 ## Demo Architecture
@@ -111,3 +174,20 @@ An open platform to connect, manage, and secure microservices
     - Mutual TLS
     - Health Checks
     - CLI
+
+---
+ 
+## Conclusions
+ 
+* Kubernetes provides several API objects to secure functions
+
+* Better Pod identity is needed to access Cloud Services
+
+* Cloud Specific controllers will help tie functions to other services
+
+* Service Binding can be leveraged to authenticate to services from functions.
+
+* Istio brings additional security objects
+ 
+* @sebgoa
+* @quablab

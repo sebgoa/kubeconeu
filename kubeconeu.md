@@ -363,25 +363,6 @@ https://github.com/heptiolabs/gangway
 
 ---
 
-## API Gateway demo
-
-[https://github.com/sebgoa/triggers/tree/master/apigateway](https://github.com/sebgoa/triggers/tree/master/apigateway)
-
-```
-res = aws.put_method(restApiId=apiid, \
-resourceId=resid, \
-httpMethod='POST', \
-authorizationType='NONE')
-```
-...
-[Required] The method's authorization type. Valid values are NONE for open access, AWS_IAM for using AWS IAM permissions, CUSTOM for using a custom authorizer, or COGNITO_USER_POOLS for using a Cognito user pool.
-
-<p align="center">
-    <img src="./img/apigateway.png" width="40%">
-</p>
-
----
-
 ## External Service Authentication
 
 What if a function needs to access a cloud service (e.g Google Storage, AWS S3)
@@ -407,6 +388,25 @@ kubeless function deploy foo --from-file foo.py\
 --env GOOGLE_APPLICATION_CREDENTIALS=/pubsub-key/key.json
 --secrets pubsub-key
 ```
+
+---
+
+## API Gateway demo
+
+[https://github.com/sebgoa/triggers/tree/master/apigateway](https://github.com/sebgoa/triggers/tree/master/apigateway)
+
+```
+res = aws.put_method(restApiId=apiid, \
+resourceId=resid, \
+httpMethod='POST', \
+authorizationType='NONE')
+```
+...
+[Required] The method's authorization type. Valid values are NONE for open access, AWS_IAM for using AWS IAM permissions, CUSTOM for using a custom authorizer, or COGNITO_USER_POOLS for using a Cognito user pool.
+
+<p align="center">
+    <img src="./img/apigateway.png" width="40%">
+</p>
 
 ---
 

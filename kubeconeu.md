@@ -10,6 +10,12 @@
 
 * Johannes Engelke, SAP Hybris, @quablab
 
+
+
+<p align="center">
+    <img src="img/bitnami_sap.png" width="70%">
+</p>
+
 ---
 
 ## What type of Apps
@@ -455,3 +461,8 @@ An open platform to connect, manage, and secure microservices
  
 * @sebgoa
 * @quablab
+
+
+<p align="center">
+    <img src="img/bitnami_sap.png" width="70%">
+</p>

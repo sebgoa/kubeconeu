@@ -4,56 +4,66 @@
 		<meta charset="utf-8" />
 		<title>Securing Serverless Functions via Kubernetes Objects</title>
 		<style>
-			@import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
-@import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
-@import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
-
-body { font-family: 'Droid Serif'; }
+			body {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
 h1, h2, h3 {
-  font-family: 'Yanone Kaffeesatz';
-  font-weight: normal;
+	font-weight: 400;
+	margin-bottom: 0;
 }
-
-pre {
-    font-family: 'Ubuntu Mono';
-    font-size: 18px;
-    background-color: #000;
-    border: 1px solid #000;
-    color: #fff;
-    padding: 0 1em;
+.remark-slide-content h1 { font-size: 3em; }
+.remark-slide-content h2 { font-size: 2em; }
+.remark-slide-content h3 { font-size: 1.6em; }
+.footnote {
+	position: absolute;
+	bottom: 3em;
 }
-
-.remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
-
-.remark-slide-content h1 {
-    font-size: 56px;
-    color: #00989e;
+li p { line-height: 1.25em; }
+.red { color: #fa0000; }
+.large { font-size: 2em; }
+a, a > code {
+	color: rgb(249, 38, 114);
+	text-decoration: none;
 }
-
-.remark-slide-content > :first-child {
-    margin-top: 0;
+code {
+	background: none repeat scroll 0 0 #F8F8FF;
+  border: 1px solid #DEDEDE;
+  border-radius: 3px 	;
+  padding: 0 0.2em;
 }
-
-
-.remark-code-line {
-    white-space: normal;
-    background-color: #000;
-    border: 1px solid #000;
-    color: #fff;
-    padding: 0 1em;
-    text-align: left;
+.remark-code, .remark-inline-code { font-family: "Bitstream Vera Sans Mono", "Courier", monospace; }
+.remark-code-line-highlighted     { background-color: #373832; }
+.pull-left {
+	float: left;
+	width: 47%;
 }
-
-.remark-slide-content:after {  
-    content: "";
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    height: 40x;
-    width: 116px;
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-image: url("/Users/sebgoa/Desktop/training/bitnami/kubernetes/logo.png");
+.pull-right {
+	float: right;
+	width: 47%;
+}
+.pull-right ~ p {
+	clear: both;
+}
+#slideshow .slide .content code {
+	font-size: 0.8em;
+}
+#slideshow .slide .content pre code {
+	font-size: 0.9em;
+	padding: 15px;
+}
+.main-title, .title {
+	background: #272822;
+	color: #777872;
+	text-shadow: 0 0 20px #333;
+}
+.title h1, .title h2, .main-title h1, .main-title h2 {
+	color: #f3f3f3;
+	line-height: 0.8em;
+}
+/* Custom */
+.remark-code {
+	display: block;
+	padding: 0.5em;
 }
 
 		</style>
@@ -71,6 +81,12 @@ pre {
 
 
 * Johannes Engelke, SAP Hybris, @quablab
+
+
+
+<p align="center">
+    <img src="img/bitnami_sap.png" width="70%">
+</p>
 
 ---
 
@@ -171,7 +187,7 @@ Functions are CRD custom objects. Extension of k8s API server.
 
 Secure Auth out of the box.
 
-<pre>
+```
 apiVersion: kubeless.io/v1beta1
 kind: Function
 metadata:
@@ -182,7 +198,7 @@ metadata:
     function: foo
   name: foo
   namespace: default
-</pre>
+```
 
 ---
 
@@ -214,12 +230,10 @@ Namespace isolation
 $ kubectl get functions
 NAME      AGE
 foo       2m
-
 $ kubectl get functions --all-namespaces
 NAMESPACE   NAME      AGE
 default     foo       2m
 foo         foo       48s
-
 $ kubectl get pods --all-namespaces |grep foo
 default     foo-f99d88cc9-sx2jl     1/1       Running   0          5m
 foo         foo-f99d88cc9-7fhzz     1/1       Running   0          3m
@@ -233,14 +247,17 @@ Like any resource, Functions can be labeled which opens the door for Network Pol
 
 ```
 kubeless function deploy foo \
-...
+--from-file foo.py \
+--handler foo.handler \
+--runtime python2.7 \
 --label foo=bar,bar=baz
 ```
 
-<pre>
+```
 kind: NetworkPolicy
 apiVersion: networking.k8s.io/v1
-...
+metadata:
+  name: deny-foobar
 spec:
   podSelector:
     matchLabels:
@@ -250,7 +267,7 @@ spec:
     - podSelector:
         matchLabels:
           access: "true"
-</pre>
+```
 
 
 ```
@@ -292,11 +309,7 @@ CMD [ "/kubeless/server" ]
 
 ## Isolate runtimes
 
-* Kata containers
-
-<p align="center">
-    <img src="./img/kata.png" width="40%">
-</p>
+* Kata containers ![](./img/kata.png)
 
 * gVisor
 
@@ -317,9 +330,7 @@ If you function needs access to the k8s API, use a service account with proper p
 
 ```
 kubectl create serviceaccount falco
-
 kubectl create role falco --verb=get,list,delete --resource=pods
-
 kubectl create rolebinding falco --role=falco --serviceaccount=default:falco
 ```
 
@@ -331,7 +342,7 @@ Use Pod Security Policies
 
 Configure default settings of function Pods:
 
-<pre>
+```
 $ kubectl get cm -n kubeless kubeless-config -o yaml
 apiVersion: v1
 items:
@@ -342,7 +353,7 @@ items:
       spec:
         template:
           serviceAccountName: falco
-</pre>
+```
 
 ---
 ## External Security:
@@ -447,10 +458,10 @@ Function needs access to some credentials.
 
 Example: use [kube2iam](https://github.com/jtblin/kube2iam) and annotate the function Pods. Need to add an annotation capability in the CLI
 
-<pre>
+```
   annotations:
     iam.amazonaws.com/role: role-arn
-</pre>
+```
 
 On GCP:
 
@@ -522,6 +533,11 @@ An open platform to connect, manage, and secure microservices
  
 * @sebgoa
 * @quablab
+
+
+<p align="center">
+    <img src="img/bitnami_sap.png" width="70%">
+</p>
 		</textarea>
 		<script src="https://gnab.github.io/remark/downloads/remark-latest.min.js"></script>
 		<script>

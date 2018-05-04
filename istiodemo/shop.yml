@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: beershop
-        image: joekhybris/beershop:kubecon
+        image: joekhybris/beershop:kubeconv2
         ports:
         - containerPort: 80
 ---

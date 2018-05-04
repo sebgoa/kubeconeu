@@ -39,4 +39,3 @@ Secure function endpoint with things like API gateway and Kong
 
 
 
-

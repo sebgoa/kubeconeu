@@ -11,6 +11,7 @@ spec:
     - "etcd.default.svc.cluster.local"
     - "product-service.default.svc.cluster.local"
     - "beershop-service.default.svc.cluster.local"
+    - "comments.default.svc.cluster.local"
     methods: ["*"]
 ---
 apiVersion: "config.istio.io/v1alpha2"

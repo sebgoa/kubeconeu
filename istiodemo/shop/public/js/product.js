@@ -52,10 +52,10 @@ $('#productModal').on('show.bs.modal', function (event) {
     }
   }) 
 
-  $.get(RATING_URL + productID, function( data ) {
-    console.log(data)
-    modal.find('.modal-body .product-rating').html(data)
-  });
+  // $.get(RATING_URL + productID, function( data ) {
+  //   console.log(data)
+  //   modal.find('.modal-body .product-rating').html(data)
+  // });
 })
 
 

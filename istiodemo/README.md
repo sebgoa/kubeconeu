@@ -70,15 +70,6 @@ Run Proxy:
 sudo go run proxy.go $(minikube service istio-ingress --url -n istio-system)
 ```
 
-
-
-
-
-
-
-
-# Demo
-
 Install functions:
 ```
 cd functions
@@ -100,6 +91,12 @@ Deploy Ingress:
 kubectl apply -f shop-ing.yml
 ```
 
+
+
+
+
+# Demo
+
 Deploy JWT Rule:
 ```
 kubectl apply -f shop-jwt.yml
@@ -119,8 +116,9 @@ Default (with and without etcd):
 ```
 kubectl apply -f rbac-default.yaml
 ```
-
+<!-- 
 Comments:
 ```
 kubectl apply -f rbac-comments.yaml
-```
+``` -->
+

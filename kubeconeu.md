@@ -115,7 +115,7 @@ Functions are CRD custom objects. Extension of k8s API server.
 
 Secure Auth out of the box.
 
-```
+<pre>
 apiVersion: kubeless.io/v1beta1
 kind: Function
 metadata:
@@ -126,7 +126,7 @@ metadata:
     function: foo
   name: foo
   namespace: default
-```
+</pre>
 
 ---
 
@@ -158,10 +158,12 @@ Namespace isolation
 $ kubectl get functions
 NAME      AGE
 foo       2m
+
 $ kubectl get functions --all-namespaces
 NAMESPACE   NAME      AGE
 default     foo       2m
 foo         foo       48s
+
 $ kubectl get pods --all-namespaces |grep foo
 default     foo-f99d88cc9-sx2jl     1/1       Running   0          5m
 foo         foo-f99d88cc9-7fhzz     1/1       Running   0          3m
@@ -181,7 +183,7 @@ kubeless function deploy foo \
 --label foo=bar,bar=baz
 ```
 
-```
+<pre>
 kind: NetworkPolicy
 apiVersion: networking.k8s.io/v1
 metadata:
@@ -195,7 +197,7 @@ spec:
     - podSelector:
         matchLabels:
           access: "true"
-```
+</pre>
 
 
 ```
@@ -211,13 +213,13 @@ curl: (28) Connection timed out after 1000 milliseconds
 
 Default security context of functions makes runtime work properly on OpenShift.
 
-```
+<pre>
 $ kubectl get pods foo-f99d88cc9-sx2jl -o yaml
 ...
   securityContext:
     fsGroup: 1000
     runAsUser: 1000
-```
+</pre>
 
 ---
 
@@ -237,7 +239,11 @@ CMD [ "/kubeless/server" ]
 
 ## Isolate runtimes
 
-* Kata containers ![](./img/kata.png)
+* Kata containers
+
+<p align="center">
+    <img src="./img/kata.png" width="40%">
+</p>
 
 * gVisor
 
@@ -270,7 +276,7 @@ Use Pod Security Policies
 
 Configure default settings of function Pods:
 
-```
+<pre>
 $ kubectl get cm -n kubeless kubeless-config -o yaml
 apiVersion: v1
 items:
@@ -281,7 +287,7 @@ items:
       spec:
         template:
           serviceAccountName: falco
-```
+</pre>
 
 ---
 ## External Security:
@@ -386,10 +392,10 @@ Function needs access to some credentials.
 
 Example: use [kube2iam](https://github.com/jtblin/kube2iam) and annotate the function Pods. Need to add an annotation capability in the CLI
 
-```
+<pre>
   annotations:
     iam.amazonaws.com/role: role-arn
-```
+</pre>
 
 On GCP:
 
